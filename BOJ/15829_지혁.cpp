@@ -1,25 +1,24 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
-#include <cmath>
+#include <string>
 
 using namespace std;
 
+const int mod = 1234567891;
+
 int main() {
     int l;
-    vector<char> string;
+    string line;
 
     cin >> l;
-
-    for(int i = 0; i < l; i++) {
-        char tmp;
-        cin >> tmp;
-        string.push_back(tmp);
-    }
+    cin >> line;
 
     long long result = 0;
+    long long indice = 1;
+    
     for(int i = 0; i < l; i++) {
-        result += (string[i] - 'a' + 1) * pow(31, i);
+        result = (result + (line[i] - 'a' + 1) * indice) % mod;
+        indice = (indice * 31) % mod;
     }
 
     cout << result;
