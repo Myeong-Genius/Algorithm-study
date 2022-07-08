@@ -45,8 +45,6 @@ int main() {
         cin >> tree[i];
     }
 
-    result = (tree[0] + tree[n - 1]) / 2;
-
     cout << binary_search(tree, n, m) << endl;
     return 0;
 }
