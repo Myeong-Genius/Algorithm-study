@@ -2,34 +2,26 @@
 
 using namespace std;
 
-int result = 1000000;
-
-int calculate(int n, int sum) {
-    if(n == 1) {
-        if(sum < result) {
-            result = sum;
-        }
-        return 1;
-    }
-    else {
-        if(n % 3 == 0) {
-            calculate(n / 3, sum + 1);
-        }
-        if(n % 2 == 0) {
-            calculate(n / 2, sum + 1);
-        }
-        calculate(n - 1, sum + 1);
-    }
-}
+int allcase[1000001];
 
 int main() {
-    long long n;
+    int n;
 
     cin >> n;
 
-    calculate(n, 0);
+    allcase[0] = allcase[1] = 0;
+    
+    for(int i = 2; i <= n; i++) {
+        allcase[i] = allcase[i - 1] + 1;
+        if(i % 3 == 0) {
+            allcase[i] = min(allcase[i / 3] + 1, allcase[i]);
+        }
+        if(i % 2 == 0) {
+            allcase[i] = min(allcase[i / 2] + 1, allcase[i]);
+        }
+    }
 
-    cout << result << endl;
+    cout << allcase[n];
 
     return 0;
 }
