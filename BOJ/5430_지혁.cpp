@@ -3,7 +3,7 @@
 #include <sstream>
 #include <vector>
 
-using namespace std;
+using namespace std; 
 
 int main() {
     int t;
@@ -11,33 +11,64 @@ int main() {
     cin >> t;
 
     for(int i = 0; i < t; i++) {
-        string command;
-        vector<string> numbers;
+        string command, array;
         int n;
+        vector<int> numbers;
+        bool reverse = false;
+        bool error = false;
 
         cin >> command;
         cin >> n;
+        cin >> array;
+        
+        array = array.substr(1, array.length() - 2);
+        istringstream ss(array);
 
-        string input;
-        cin >> input;
-        istringstream ss(input);
+        for(int j = 0; j < n; j++) {
+            string tmpString;
+            getline(ss, tmpString, ',');
 
-        string tmp;
-        for(int j; j < n; j++) {
-            getline(ss, tmp, ',');
-            int length = tmp.size();
-
-            if(tmp[0] == '[') {
-                tmp = tmp.substr(1);
-            }
-            else if(tmp[length - 1] == ']') {
-                tmp = tmp.substr(0, length - 2);
-            }
-            numbers.push_back(tmp);
+            int tmpInt;
+            stringstream ssInt(tmpString);
+            ssInt >> tmpInt;
+            numbers.push_back(tmpInt);
         }
 
-        for(int j; j < n; j++) {
-            cout << numbers[j] << endl;
+        for(int j = 0; j < command.length(); j++) {
+            if(command[j] == 'R') {
+                reverse = !reverse;
+            }
+            if(command[j] == 'D') {
+                if(numbers.size() == 0) {
+                    error = !error;
+                }
+                else if(!reverse) {
+                    numbers.erase(numbers.begin());
+                }
+                else {
+                    numbers.erase(numbers.end() - 1);
+                }
+            }
+        }
+
+        if(error) {
+            cout << "error" << endl;
+        }
+        else {
+            cout << "[";
+            if(reverse) {
+                for(int j = numbers.size() - 1; j > 0; j--) {
+                    cout << numbers[j] << ",";
+                }
+                cout << numbers[0];
+            }
+            else {
+                for(int j = 0; j < numbers.size() - 1; j++) {
+                    cout << numbers[j] << ",";
+                }
+                cout << numbers[numbers.size() - 1];
+            }
+            cout << "]" << endl;
         }
     }
 
