@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <vector>
+#include <deque>
 
 using namespace std; 
 
@@ -11,9 +11,12 @@ int main() {
     cin >> t;
 
     for(int i = 0; i < t; i++) {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
+        
         string command, array;
         int n;
-        vector<int> numbers;
+        deque<int> numbers;
         bool reverse = false;
         bool error = false;
 
@@ -40,19 +43,23 @@ int main() {
             }
             if(command[j] == 'D') {
                 if(numbers.size() == 0) {
-                    error = !error;
+                    error = true;
+                    break;
                 }
                 else if(!reverse) {
-                    numbers.erase(numbers.begin());
+                    numbers.pop_front();
                 }
                 else {
-                    numbers.erase(numbers.end() - 1);
+                    numbers.pop_back();
                 }
             }
         }
 
         if(error) {
             cout << "error" << endl;
+        }
+        else if(numbers.size() == 0) {
+            cout << "[" << "]" << endl;
         }
         else {
             cout << "[";
