@@ -1,51 +1,33 @@
 #include<iostream>
-#include<vector>
 #include<algorithm>
-using namespace std;
+#include<vector>
 
+using namespace std;
 struct promotion{
-    int cost;
-    int effect;
+    int cost, effect;
 };
 
+int maxByMoney[100001];
+
 int main(){
-    int minimum;
-    int rep;
-    int answer;
-    cin >> minimum >> rep;
-    vector<promotion> promoInform(rep);
-    double EperC = 0;
-    for (int i = 0; i < rep; i++){
-        int c,e;
-        cin >> c >> e;
-        if (e/c > EperC){
-            EperC = (double)e / c;
-        }
-        promoInform[i].cost = c;
-        promoInform[i].effect = e;
+    int minimum, cities, i;
+    cin >> minimum >> cities;
+    vector<promotion> promo(cities);
+    for (i = 0; i < cities; i++){
+        cin >> promo[i].cost >> promo[i].effect;
     }
 
-    vector<vector<int>> dp(rep + 1, vector<int>(EperC * (int)(minimum / EperC) + 2, 0));
-
-    for (int i = 1; i <= rep; i++){
-        for (int j = 1; j < dp[i].size() ; j++){
-            int cost = promoInform[i-1].cost;
-            int effect = promoInform[i-1].effect;
-            if (j < cost){
-                dp[i][j] = dp[i-1][j];
-            }
-            else{
-                dp[i][j] = max(dp[i][j-cost] + effect, dp[i-1][j]);
-            }
+    for (i =0; i < cities; i++){
+        int cost = promo[i].cost, effect = promo[i].effect;
+        for (int j =1; maxByMoney[j-1] < minimum; j++){
+            if (j >= cost)
+                maxByMoney[j] = max(maxByMoney[j - cost] + effect, maxByMoney[j]);
         }
     }
-
-    for (int j = 1; j < dp[0].size(); j++){
-        if(dp[rep][j] >= minimum){
-            answer =j;
-            break;
-        }
+    for(i = 0; maxByMoney[i] < minimum ; i++){
+        continue;
     }
-    cout << answer;
+    
+    cout << i;
     return 0;
 }
