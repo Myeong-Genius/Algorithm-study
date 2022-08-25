@@ -3,10 +3,10 @@
 using namespace std;
 
 vector<int> graph[101];
-bool true_man[101], visited[101];
+bool true_graph[101], visited[101];
 int N, M, people_cnt, person_num, ans;
 void dfs(int pos){
-    true_man[pos] = true;
+    true_graph[pos] = true;
     visited[pos] = true;
 
     for(int i = 0; i < graph[pos].size(); i++){
@@ -21,7 +21,7 @@ int main(){
     ans = M;
     while(people_cnt--){
         cin >> person_num;
-        true_man[person_num + 49] = true;
+        true_graph[person_num + 49] = true;
     }
     for(int i = 0; i < M; i++){
         cin >> people_cnt;
@@ -32,10 +32,10 @@ int main(){
         }
     }
     for(int i = 0; i < N; i++){
-        if(true_man[50 + i] && !visited[50 + i]) dfs(50 + i);
+        if(true_graph[50 + i] && !visited[50 + i]) dfs(50 + i);
     }
     for(int i = 0; i < M; i++){
-        if(true_man[i]) ans--;
+        if(true_graph[i]) ans--;
     }
     cout << ans;
     return 0;
