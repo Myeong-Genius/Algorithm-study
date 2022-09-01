@@ -43,7 +43,7 @@ bool isFilled(){
 void draw(){
     int s = 0, r = 0, c = 0, n = 1;
     if(isInBound(0, 0)){
-            answer[0 - r1][0 - c1] = n;
+            answer[-r1][-c1] = n;
     }
     r = 1, c = 1, s = 2;
     while(!isFilled()){
