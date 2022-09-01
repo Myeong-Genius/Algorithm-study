@@ -1,8 +1,9 @@
 #include<iostream>
 #include<algorithm>
+#include<iomanip>
 using namespace std;
 
-int r1, c1, r2, c2;
+int r1, c1, r2, c2, max_n;
 int answer[50][6];
 
 void input();
@@ -49,6 +50,7 @@ void draw(){
             n++;
             if(isInBound(r, c)){
                 answer[r - r1][c - c1] = n;
+                max_n = n;
             }
             r--;
         }
@@ -58,6 +60,7 @@ void draw(){
             n++;
             if(isInBound(r, c)){
                 answer[r - r1][c - c1] = n;
+                max_n = n;
             }
         }
 
@@ -66,6 +69,7 @@ void draw(){
             n++;
             if(isInBound(r, c)){
                 answer[r - r1][c - c1] = n;
+                max_n = n;
             }
         }
         for(int i = 0; i < s; i++){
@@ -73,6 +77,7 @@ void draw(){
             c++;
             if(isInBound(r, c)){
                 answer[r - r1][c - c1] = n;
+                max_n = n;
             }
         }
         if(s==0) {r--;}
@@ -84,9 +89,15 @@ void draw(){
 void print(){
     int r = r2 - r1 + 1;
     int c = c2 - c1 + 1;
+    int digit = 0;
+    while(max_n){
+        max_n /= 10;
+        digit++;
+    }
+
     for(int i = 0; i < r; i++){
         for(int j = 0; j < c; j++){
-            cout << answer[i][j] <<" ";
+            cout << setw(digit) << answer[i][j] << " ";
         }
         cout<<'\n';
     }
