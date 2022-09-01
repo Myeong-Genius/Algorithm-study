@@ -45,16 +45,16 @@ void draw(){
     if(isInBound(0, 0)){
             answer[0 - r1][0 - c1] = n;
     }
+    r = 1, c = 1, s = 2;
     while(!isFilled()){
         for(int i = 0; i < s; i++){
+            r--;
             n++;
             if(isInBound(r, c)){
                 answer[r - r1][c - c1] = n;
                 max_n = n;
             }
-            r--;
         }
-        r++;
         for(int i = 0; i < s; i++){
             c--;
             n++;
@@ -63,7 +63,6 @@ void draw(){
                 max_n = n;
             }
         }
-
         for(int i = 0; i < s; i++){
             r++;
             n++;
@@ -73,15 +72,14 @@ void draw(){
             }
         }
         for(int i = 0; i < s; i++){
-            n++;
             c++;
+            n++;
             if(isInBound(r, c)){
                 answer[r - r1][c - c1] = n;
                 max_n = n;
             }
         }
-        if(s==0) {r--;}
-        c++;
+        c++, r++;
         s += 2;
     }
 }
