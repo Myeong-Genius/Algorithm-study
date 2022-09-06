@@ -2,58 +2,101 @@
 
 using namespace std;
 
-int R, C, T;
-int A[51][51], add[51][51];
-int dx[4] = {1, -1, 0, 0};
-int dy[4] = {0, 0, 1, -1};
+int r, c, t;
+int room[51][51];
+int add[51][51];
+int dr[4] = {0, 1, 0, -1};
+int dc[4] = {-1, 0, 1, 0};
+int up_row, down_row;
+int total_dust;
 
-void diffuse() {
-    for(int i = 1; i <= R; i++) {
-        for(int j = 1; j <= C; j++) {
-            if(A[i][j] >= 5) {
-                int count = 0;
-                for(int k = 0; k < 4; k++) {
-                    if((i + dx[k]) > 0 && (j + dy[k]) > 0 && (i + dx[k]) <= R && (j + dy[k]) <= C) {
-                        if(A[i + dx[k]][j + dy[k]] != -1) {
-                            add[i + dx[i]][j + dy[k]] += (A[i][j] / 5);
-                            count++;
-                        }
-                    }
-                }
-                A[i][j] -= (A[i][j] / 5) * count;
+void spreadDust() {
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            int cnt = 0;
+            int val = room[i][j] / 5;
+            if (room[i][j] == 0 || room[i][j] == -1)
+                continue;
+            for (int k = 0; k < 4; k++) {
+                int nr = i + dr[k];
+                int nc = j + dc[k];
+                if (nr < 0 || nr >= r || nc < 0 || nc >= c)
+                    continue;
+                if (room[nr][nc] == -1)
+                    continue;
+                add[nr][nc] += val;
+                cnt++;
             }
+            add[i][j] -= (cnt * val);
         }
     }
-
-    for(int i = 1; i <= R; i++) {
-        for(int j = 1; j <= C; j++) {
-            A[i][j] += add[i][j];
+    
+    for (int i = 0; i < r; i++) {
+        for (int j = 0; j < c; j++) {
+            room[i][j] += add[i][j];
             add[i][j] = 0;
         }
     }
 }
 
+void airCleaner() {
+    total_dust -= room[up_row - 1][0];
+    total_dust -= room[down_row + 1][0];
+
+    for (int i = up_row - 1; i > 0; i--)
+        room[i][0] = room[i - 1][0];
+    for (int i = 0; i < c - 1; i++)
+        room[0][i] = room[0][i + 1];
+    for (int i = 1; i <= up_row; i++)
+        room[i - 1][c - 1] = room[i][c - 1];
+    for (int i = c - 1; i > 1; i--)
+        room[up_row][i] = room[up_row][i - 1];
+    room[up_row][1] = 0;
+
+    for (int i = down_row + 1; i < r - 1; i++)
+        room[i][0] = room[i + 1][0];
+    for (int i = 0; i < c - 1; i++)
+        room[r - 1][i] = room[r - 1][i + 1];
+    for (int i = r - 1; i >= down_row; i--)
+        room[i][c - 1] = room[i - 1][c - 1];
+    for (int i = c - 1; i > 1; i--)
+        room[down_row][i] = room[down_row][i - 1];
+    room[down_row][1] = 0;
+}
+
 int main() {
-    ios::sync_with_stdio(false);
+    ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    cin >> R >> C >> T;
-
-    for(int i = 1; i <= R; i++) {
-        for(int j = 1; j <= C; j++) {
-            cin >> A[i][j];
+    cin >> r >> c >> t;
+    bool flag = false;
+    for (int i = 0; i < r; i++)
+    {
+        for (int j = 0; j < c; j++)
+        {
+            cin >> room[i][j];
+            if (room[i][j] == -1)
+            {
+                if (!flag)
+                {
+                    up_row = i;
+                    flag = true;
+                }
+                else
+                    down_row = i;
+            }
+            else
+                total_dust += room[i][j];
         }
     }
 
-    diffuse();
-
-    for(int i = 0; i <= R; i++) {
-        for(int j = 0; j <= C; j++) {
-            cout << A[i][j] << " ";
-        }
-        cout << "\n";
+    while (t--) {
+        spreadDust();
+        airCleaner();
     }
+
+    cout << total_dust << '\n';
 
     return 0;
 }
