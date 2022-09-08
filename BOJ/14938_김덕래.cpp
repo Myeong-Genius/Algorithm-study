@@ -40,7 +40,7 @@ int findClosestNode(){
     int node = 0, l = INF;
     for(auto it = visited.begin(); it != visited.end(); ++it){
         for(auto it2 = graph[*it].begin(); it2 != graph[*it].end(); ++it2){
-            if(find(visited.begin(), visited.end(), it2 -> dest) == visited.end() && it2 -> len < l){
+            if(find(visited.begin(), visited.end(), it2 -> dest) == visited.end() && dist[it2 -> dest] < l){
                 node = it2 -> dest;
                 l = it2 -> len;
             }
@@ -48,7 +48,7 @@ int findClosestNode(){
     }
     return node;
 }
-int nn;
+
 void dijkstra(int node){
     visited.push_back(node);
     for(auto it = graph[node].begin(); it != graph[node].end(); ++it){
