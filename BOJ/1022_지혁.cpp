@@ -13,23 +13,23 @@ int main() {
 			int x = i - r1, y = j - c1;
 			if(i - j < 0) {
 				if(i + j < 0) {
-                    a[x][y] = 4 * i * i + i + 1 - j;
-                }
+                    			a[x][y] = 4 * i * i + i + 1 - j;
+                		}
 				else {
-                    a[x][y] = 4 * j * j - 3 * j + 1 - i;
-                }
+                    			a[x][y] = 4 * j * j - 3 * j + 1 - i;
+                		}
 			}
 			else {
 				if(i + j < 0) {
-                    a[x][y] = 4 * j*j - j + 1 + i; 
-                }
+                    			a[x][y] = 4 * j*j - j + 1 + i; 
+                		}
 				else {
-                    a[x][y] = 4 * i*i + 3 * i + 1 + j;
-                }
+                    			a[x][y] = 4 * i*i + 3 * i + 1 + j;
+                		}
 			}
 			if(a[x][y] > m) {
-                m = a[x][y];
-            }
+                		m = a[x][y];
+            		}
 		}
 	}
 
@@ -38,8 +38,8 @@ int main() {
     }
 	for(int i = 0; i <= r2 - r1; i++) {
 		for(int j = 0; j <= c2 - c1; j++) {
-            printf("%*d ", s, a[i][j]);
-        }
+            		printf("%*d ", s, a[i][j]);
+        	}
 		puts("");
 	}
 
