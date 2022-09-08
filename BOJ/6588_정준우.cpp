@@ -2,8 +2,9 @@
 using namespace std;
 
 int n, a, b;
-bool is_not_prime[1000000];
+bool is_not_prime[1000001];
 void check_prime(){
+    is_not_prime[0] = is_not_prime[1] = true;
     for(int i = 2; i < 1000001; i++){
         if(is_not_prime[i]) continue;
         for(int j = 2; (i * j) < 1000001; j++) is_not_prime[i * j] = true;
@@ -18,7 +19,7 @@ int main(){
         cin >> n;
         if(n == 0) break;
         a = b = 0;
-        for(int i = 2; i < 1000000; i++){
+        for(int i = 3; i < 1000001; i++){
             if(!is_not_prime[i] && !is_not_prime[n - i]){
                 a = i, b = n - i;
                 break;
