@@ -42,7 +42,7 @@ int findClosestNode(){
         for(auto it2 = graph[*it].begin(); it2 != graph[*it].end(); ++it2){
             if(find(visited.begin(), visited.end(), it2 -> dest) == visited.end() && dist[it2 -> dest] < l){
                 node = it2 -> dest;
-                l = it2 -> len;
+                l = dist[it2 -> dest]
             }
         }
     }
