@@ -69,7 +69,7 @@ int main() {
         }
     }
 
-    cout << "\n" << ans << "\n";
+    cout << ans << "\n";
 
     return 0;
 }
