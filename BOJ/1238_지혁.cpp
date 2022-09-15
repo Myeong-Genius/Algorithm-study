@@ -51,11 +51,6 @@ int main() {
         sum[i] = dis[X];
     }
 
-    for(int i = 1; i <= N; i++) {
-        cout << sum[i] << " ";
-    }
-    cout << "\n";
-
     fill(dis, dis + N + 1, INF);
     dijkstra(X);
 
