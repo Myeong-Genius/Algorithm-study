@@ -18,7 +18,7 @@ void topology_sort() {
         }
     }
 
-    for(int i = 1; i <= N; i++) {
+    while(!q.empty()) {
         pair<int, int> cur = q.front();
         q.pop();
         for(int j = 0; j < graph[cur.first].size(); j++) {
