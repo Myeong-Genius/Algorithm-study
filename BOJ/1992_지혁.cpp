@@ -42,10 +42,10 @@ int main() {
 
     cin >> N;
     for(int i = 0; i < N; i++) {
-        string tmp;
-        cin >> tmp;
+        char tmp;
         for(int j = 0; j < N; j++) {
-            media[i][j] = tmp[j] - '0';
+            cin >> tmp;
+            media[i][j] = tmp - '0';
         }
     }
 
