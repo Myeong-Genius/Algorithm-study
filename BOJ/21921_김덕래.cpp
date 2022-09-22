@@ -20,15 +20,13 @@ void input(){
 void solve(){
     int visitor_xdays = accumulate(arr, arr + x, 0);
     for(int i = 0; i <= n - x; i++){
+        if(i != 0) visitor_xdays += arr[i + x - 1] - arr[i - 1];
         if(answer == visitor_xdays){
             count_max_visit++;
         }
         else if(visitor_xdays > answer){
             answer = visitor_xdays;
             count_max_visit = 1;
-        }
-        if(i != n - x){
-            visitor_xdays += arr[i + x] - arr[i];
         }
     }
     if(answer){
