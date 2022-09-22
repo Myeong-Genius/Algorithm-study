@@ -19,6 +19,15 @@ int main() {
     }
 
     int ans = 0, count = 0;
+    for(int i = 1; i <= X; i++) {
+        if(V[i] > ans) {
+            ans = V[i];
+            count = 1;
+        }
+        else if(V[i] == ans) {
+            count++;
+        }
+    }
     for(int i = 1; i <= N - X; i++) {
         int check = V[i + X] - V[i];
         if(check > ans) {
