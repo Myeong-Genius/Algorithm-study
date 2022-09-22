@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int N, X, ans, con;
-vector<int> visitor;
+int N, X;
+int V[250001];
 
 int main() {
     ios::sync_with_stdio(false);
@@ -12,23 +12,21 @@ int main() {
     cout.tie(NULL);
 
     cin >> N >> X;
-    for(int i = 0; i < N; i++) {
+    for(int i = 1; i <= N; i++) {
         int tmp;
         cin >> tmp;
-        visitor.push_back(tmp);
+        V[i] = V[i - 1] + tmp;
     }
 
-    for(int i = 0; i <= N - X; i++) {
-        int sum = 0;
-        for(int j = 0; j < X; j++) {
-            sum += visitor[i + j];
+    int ans = 0, count = 0;
+    for(int i = 1; i <= N - X; i++) {
+        int check = V[i + X] - V[i];
+        if(check > ans) {
+            ans = check;
+            count = 1;
         }
-        if(ans < sum) {
-            ans = sum;
-            con = 1;
-        }
-        else if(ans == sum) {
-            con++;
+        else if(check == ans) {
+            count++;
         }
     }
 
@@ -37,7 +35,7 @@ int main() {
     }
     else {
         cout << ans << "\n";
-        cout << con << "\n";
+        cout << count << "\n";
     }
 
     return 0;
