@@ -42,9 +42,9 @@ int main() {
 
     cin >> N;
     for(int i = 0; i < N; i++) {
-        string tmp;
-        cin >> tmp;
+        char tmp;
         for(int j = 0; j < N; j++) {
+            cin >> tmp;
             media[i][j] = tmp[j] - '0';
         }
     }
