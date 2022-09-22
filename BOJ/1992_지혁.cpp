@@ -28,9 +28,9 @@ void compress(int n, int x, int y) {
     else {
         cout << "(";
         compress(n / 2, x, y);
-        compress(n / 2, y, x + n / 2);
-        compress(n / 2, y + n / 2, x);
-        compress(n / 2, y + n / 2, x + n / 2);
+        compress(n / 2, x, y + n / 2);
+        compress(n / 2, x + n / 2, y);
+        compress(n / 2, x + n / 2, y + n / 2);
         cout << ")";
     }
 }
