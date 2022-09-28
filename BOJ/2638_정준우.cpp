@@ -44,7 +44,7 @@ int main(){
 
             dy = pos.first + dir[i][0];
             dx = pos.second + dir[i][1];
-
+            if(dy < 0 || dy >= N || dx < 0 || dx >= M) continue;
             if(in_air[dy][dx] && map[dy][dx] < time) cheese_cnt++;
         }
         if(cheese_cnt < 2) map[pos.first][pos.second]++, que.push({time + 1, pos});
