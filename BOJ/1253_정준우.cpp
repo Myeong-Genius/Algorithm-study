@@ -25,7 +25,7 @@ int main(){
                 
                 // 숫자가 존재하지 않거나 이미 계산한 경우
                 if(num_cnt[sum] == 0) continue;
-                // 더하는 숫자 중 하나가 1개고 합이 1개만 존재하는 경우
+                // 더하는 숫자 중 하나가 0이고 합이 1개만 존재하는 경우
                 if(num_cnt[sum] == 1 && (num_list[i] == sum || num_list[j] == sum)) continue;
                 // 0 + 0인 경우 중, 0이 배열에서 2개만 존재하는 경우
                 if(num_list[i] == 0 && num_list[j] == 0 && num_cnt[sum] == 2) continue;
