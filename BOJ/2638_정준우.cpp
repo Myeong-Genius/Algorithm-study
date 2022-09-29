@@ -3,8 +3,8 @@
 #include<queue>
 using namespace std;
 
-queue<pair<int, pair<int, int> > > que;
 bool in_air[100][100];
+queue<pair<int, pair<int, int> > > que;
 int N, M, ans, map[100][100], dir[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 void dfs(int y, int x, int time){
     in_air[y][x] = true;
@@ -31,7 +31,7 @@ int main(){
     }
     while(!que.empty()){
         pair<int, int> pos = que.front().second;
-        int cheese_cnt = 0, time = que.front().first;
+        int air_cnt = 0, time = que.front().first;
 
         que.pop();
         if(ans != time){
@@ -45,9 +45,9 @@ int main(){
             dy = pos.first + dir[i][0];
             dx = pos.second + dir[i][1];
             if(dy < 0 || dy >= N || dx < 0 || dx >= M) continue;
-            if(in_air[dy][dx] && map[dy][dx] < time) cheese_cnt++;
+            if(in_air[dy][dx] && map[dy][dx] < time) air_cnt++;
         }
-        if(cheese_cnt < 2) map[pos.first][pos.second]++, que.push({time + 1, pos});
+        if(air_cnt < 2) map[pos.first][pos.second]++, que.push({time + 1, pos});
     }
     cout << ans;
     return 0;
