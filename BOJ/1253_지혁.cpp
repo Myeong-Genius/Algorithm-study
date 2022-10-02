@@ -3,9 +3,8 @@
 
 using namespace std;
 
-int N, ans;
+int N, ans, val;
 int A[2000];
-bool check[2000];
 
 int main() {
     ios::sync_with_stdio(false);
@@ -19,20 +18,31 @@ int main() {
     sort(A, A + N);
 
     for(int i = 0; i < N; i++) {
-        for(int j = 0; j < i; j++) {
-            for(int k = j + 1; k < i; k++) {
-                if((A[i] == A[j] + A[k]) && !check[i]) {
-                    check[i] = true;
+        val = A[i];
+        int left = 0, right = N - 1, sum;
+        while(left < right) {
+            sum = A[left] + A[right];
+            if(sum == val) {
+                if(left != i && right != i) {
+                    ans++;
+                    break;
                 }
+                else if(left == i) {
+                    left++;
+                }
+                else if(right == i) {
+                    right--;
+                }
+            }
+            else if(sum < val) {
+                left++;
+            }
+            else {
+                right--;
             }
         }
     }
 
-    for(int i = 0; i < N; i++) {
-        if(check[i]) {
-            ans++;
-        }
-    }
     cout << ans << "\n";
     
     return 0;
