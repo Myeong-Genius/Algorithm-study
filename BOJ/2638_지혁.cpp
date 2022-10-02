@@ -82,21 +82,6 @@ int main() {
         }
     }
 
-    // checkAir();
-    // passed1Hour();
-    // for(int i = 0; i <= N; i++) {
-    //     for(int j = 0; j <= M; j++) {
-    //         cout << outAir[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
-    // for(int i = 0; i <= N; i++) {
-    //     for(int j = 0; j <= M; j++) {
-    //         cout << paper[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
-
     while(!checkEmpty()) {
         memset(visited, false, sizeof(visited));
         memset(outAir, 0, sizeof(outAir));
