@@ -5,8 +5,50 @@
 using namespace std;
 
 int N, M, ans;
-vector<pair<int, int> > chicken;
-vector<pair<int, int> > house;
+vector<pair<int, int> > chicken, house;
+vector<pair<int, int> > select_chickens;
+bool selected[13];
+
+int calculateDistance(vector<pair<int, int> > chickens) {
+    int sum = 0;
+
+    for(int i = 0; i < house.size(); i++) {
+        int dist = 10000;
+        for(int j = 0; j < chickens.size(); j++) {
+            int cur_dist = abs(chickens[j].first - house[i].first) + abs(chickens[j].second - house[i].second);
+            if(dist > cur_dist) {
+                dist = cur_dist;
+            }
+        }
+        sum += dist;
+    }
+
+    return sum;
+}
+
+void select(int index, int count) {
+    if(count == M) {
+        int sum = calculateDistance(select_chickens);
+        if(ans == 0) {
+            ans = sum;
+        }
+        else {
+            if(ans > sum) {
+                ans = sum;
+            }
+        }
+    }
+    for(int i = index; i < chicken.size(); i++) {
+        if(selected[i]) {
+            continue;
+        }
+        selected[i] = true;
+        select_chickens.push_back(chicken[i]);
+        select(i, count + 1);
+        selected[i] = false;
+        select_chickens.pop_back();
+    }
+}
 
 int main() {
     ios::sync_with_stdio(false);
@@ -28,19 +70,10 @@ int main() {
     }
 
     if(chicken.size() == M) {
-        for(int i = 0; i < house.size(); i++) {
-            int dist = 10000;
-            for(int j = 0; j < chicken.size(); j++) {
-                int cur_dist = abs(chicken[j].first - house[i].first) + abs(chicken[j].second - house[i].second);
-                if(dist > cur_dist) {
-                    dist = cur_dist;
-                }
-            }
-            ans += dist;
-        }
+        ans = calculateDistance(chicken);
     }
     else {
-        // 지워야 할 치킨 집이 있을 때 경우
+        select(0, 0);
     }
 
     cout << ans << "\n";
