@@ -39,7 +39,7 @@ int main() {
     }
     sort(result.begin(), result.end());
 
-    for(int i = 0; i < result.size(); i++) {
+    for(int i = 1; i < result.size(); i++) {
         cout << result[i] << " ";
     }
     cout << "\n";
