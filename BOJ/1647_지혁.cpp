@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// https://yabmoons.tistory.com/188 - 참고자료
+
 int N, M, ans;
 int parent[100001];
 vector<pair<int, pair<int, int> > > edge;
@@ -49,7 +51,7 @@ int main() {
     for(int i = 0; i < M; i++) {
         int A, B, C;
         cin >> A >> B >> C;
-        edge.push_back(make_pair(C, make_pair(A, B)));
+        edge.push_back({C, {A, B}});
     }
 
     sort(edge.begin(), edge.end());

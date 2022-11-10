@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// https://pangsblog.tistory.com/62 - 참고자료
+
 int N;
 vector<int> arr, result;
 
