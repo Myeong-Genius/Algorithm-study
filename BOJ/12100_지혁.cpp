@@ -78,7 +78,7 @@ vector<vector<long long> > down(vector<vector< long long> > board) {
 
     for(int i = 0; i < N; i++) {
         for(int j = N - 2; j >= 0; j--) {
-            if(board[i][j] == 0) {
+            if(board[j][i] == 0) {
                 continue;
             }
             for(int k = j + 1; k < N; k++) {
@@ -106,7 +106,7 @@ vector<vector<long long> > up(vector<vector< long long> > board) {
 
     for(int i = 0; i < N; i++) {
         for(int j = 1; j < N; j++) {
-            if(board[i][j] == 0) {
+            if(board[j][i] == 0) {
                 continue;
             }
             for(int k = j - 1; k >= 0; k--) {
