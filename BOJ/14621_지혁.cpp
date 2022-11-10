@@ -34,7 +34,7 @@ bool compare(pair<pair<int, int >, int > p1, pair<pair<int, int >, int > p2) {
 
 int main() {
     cin >> N >> M;
-    for(int i = 0; i < N; i++) {
+    for(int i = 1; i <= N; i++) {
         graph[i] = i;
         cin >> univ_types[i];
     }
@@ -42,7 +42,7 @@ int main() {
         int s, e, d;
         cin >> s >> e >> d;
         if(univ_types[s] != univ_types[e]) {
-            edges.push_back(make_pair(make_pair(s, e), d));
+            edges.push_back({ {s, e}, d });
         }
     }
 
