@@ -25,7 +25,6 @@ vector<vector<int> > up(vector<vector<int> > arr){
             for(int k = i; k > 0; k--){
                 if(n_arr[k][j]){
                     if(n_arr[k-1][j] == n_arr[k][j]){
-                        // cout << i <<j <<k << changed[k - 1] <<endl;
                         if(!changed[k - 1]){
                             n_arr[k-1][j] *=2;
                             n_arr[k][j] = 0;
@@ -41,10 +40,15 @@ vector<vector<int> > up(vector<vector<int> > arr){
                         break;
                     }
                 }
+                else    break;
             }
         }
     }
-    biggest = *max_element(&n_arr[0][0], &n_arr[0][0] + 400);
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            biggest = max(n_arr[i][j], biggest);
+        }
+    }
     return n_arr;
 }
 
@@ -57,7 +61,6 @@ vector<vector<int> > down(vector<vector<int> > arr){
             for(int k = i; k < n - 1; k++){
                 if(n_arr[k][j]){
                     if(n_arr[k + 1][j] == n_arr[k][j]){
-                        // cout << i <<j <<k << changed[k - 1] <<endl;
                         if(!changed[k + 1]){
                             n_arr[k + 1][j] *=2;
                             n_arr[k][j] = 0;
@@ -73,10 +76,15 @@ vector<vector<int> > down(vector<vector<int> > arr){
                         break;
                     }
                 }
+                else    break;
             }
         }
     }
-    biggest = *max_element(&n_arr[0][0], &n_arr[0][0] + 400);
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            biggest = max(n_arr[i][j], biggest);
+        }
+    }
     return n_arr;
 }
 
@@ -104,10 +112,15 @@ vector<vector<int> > left(vector<vector<int> > arr){
                         break;
                     }
                 }
+                else     break;
             }
         }
     }
-    biggest = *max_element(&n_arr[0][0], &n_arr[0][0] + 400);
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            biggest = max(n_arr[i][j], biggest);
+        }
+    }
     return n_arr;
 }
 
@@ -135,10 +148,15 @@ vector<vector<int> > right(vector<vector<int> > arr){
                         break;
                     }
                 }
+                else    break;
             }
         }
     }
-    biggest = *max_element(&n_arr[0][0], &n_arr[0][0] + 400);
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            biggest = max(n_arr[i][j], biggest);
+        }
+    }
     return n_arr;
 }
 
@@ -155,15 +173,9 @@ void solve(){
     explore(0, map);
     cout << biggest;
 }
+
 int main(){
     input();
     solve();
-    map = down(map);
-    for(int i = 0; i < 20; i++){
-        for(int j = 0; j < 20; j++){
-            cout << map[i][j] << ' ';
-        }
-        cout << '\n';
-    }
     return 0;
 }
