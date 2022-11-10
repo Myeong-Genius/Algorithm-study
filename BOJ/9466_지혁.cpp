@@ -1,5 +1,4 @@
 #include <iostream>
-#include <queue>
 #include <cstring>
 
 using namespace std;
@@ -35,11 +34,11 @@ int main() {
     for(int i = 0; i < T; i++) {
         cin >> n;
         for(int j = 1; j <= n; j++) {
-            cin >> graph[i];
+            cin >> graph[j];
         }
         for(int j = 1; j <= n; j++) {
-            if(!visited[i]) {
-                has_cycle(i);
+            if(!visited[j]) {
+                has_cycle(j);
             }
         }
         cout << n - cnt << "\n";
